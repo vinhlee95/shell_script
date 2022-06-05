@@ -1,4 +1,5 @@
-#! /bin/bash
+#! /bin/bash -x
+PS4='+ $BASH_SOURCE:$LINENO: '
 
 read -p "Enter your answer: " ANSWER
 
