@@ -1,6 +1,15 @@
 #! /bin/bash
-echo "Enter the file name"
-read FILE
+
+# echo "Enter the file name"
+# read FILE
+
+FILE=$1
+
+if [ -z $FILE ]
+then
+  echo "You must provide a file name"
+  exit 1
+fi
 
 DIR_NAME="excercises/check_file"
 FILE_PATH="$PWD/$DIR_NAME/$FILE"
