@@ -1,0 +1,1 @@
+Scripts in this directory are created from excercises: https://medium.com/@sankad_19852/shell-scripting-exercises-5eb7220c2252
