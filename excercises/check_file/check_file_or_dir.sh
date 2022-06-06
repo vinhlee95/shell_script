@@ -1,29 +1,44 @@
 #! /bin/bash
-
-# echo "Enter the file name"
-# read FILE
-
-FILE=$1
-
-if [ -z $FILE ]
-then
-  echo "You must provide a file name"
-  exit 1
-fi
-
 DIR_NAME="excercises/check_file"
-FILE_PATH="$PWD/$DIR_NAME/$FILE"
 
-# Check if it is a regular file
-if [ -f $FILE_PATH.* ]
+function check_file() {
+  local FILE_NAME=$1
+  local FILE_PATH="$PWD/$DIR_NAME/$FILE_NAME"
+
+  # Check if it is a regular file
+  if [ -f $FILE_PATH.* ]
+  then
+    echo "$FILE_NAME is a regular file in $PWD/$DIR_NAME"
+  elif [ -d $FILE_PATH ]
+  then
+    echo "$FILE_NAME is is a directory"
+  else
+    echo "$FILE_NAME is neither a regular file nor a directory"
+  fi
+}
+
+function check_files() {
+  local FILES=$@
+  if [ -z $FILES ]
+  then
+    echo "You must provide a list of file names."
+    return 1
+  fi
+
+  for FILE in $FILES
+  do
+    check_file $FILE
+  done
+  return 0
+}
+
+
+check_files $@
+
+if [ $? -eq 0 ]
 then
-  echo "It is a regular file"
-elif [ -d $FILE_PATH ]
-then
-  echo "It is a directory"
-else
-  echo "It is neither a regular file nor a directory"
+  echo "Success. Results: "
+  ls -l $PWD/$DIR_NAME
+else 
+  echo "Failure."
 fi
-
-echo "Results: "
-ls -l $FILE_PATH.*
